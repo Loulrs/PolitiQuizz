@@ -1,0 +1,9 @@
+CREATE TABLE responses (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    question_id INT REFERENCES questions(id) ON DELETE CASCADE,
+    answer BOOLEAN NOT NULL, -- TRUE = Oui, FALSE = Non
+    points_awarded INT NOT NULL,
+    answered_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE (user_id, question_id) -- Un utilisateur ne peut répondre qu'une fois à une question
+);
